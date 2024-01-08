@@ -8,6 +8,7 @@ public class HomePageTest extends BaseTest {
     @Test
     public void verifyMyAccountChangeTest(){
 
-
+        page.getInstance(HomePage.class).clickChangeIconButton();
+        page.getInstance(HomePage.class).clickMyAccount();
     }
 }

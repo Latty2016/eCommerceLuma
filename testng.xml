@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite"><test verbose="2" preserve-order="true" name="C:/Users/latif/IdeaProjects/eCommerceLuma_FrontEnd"/>
-    <listeners>
-        <listener class-name="com.qa.extentReportListener.ExtentReporterNG" />
-    </listeners>
+
     <test name="eCommerceLuma_FrontEnd" verbose="2" preserve-order="true" >
         <classes>
+            <class name="com.qa.testcases.LoginPageTest"></class>
+            <class name="com.qa.testcases.HomePageTest"></class>
 
         </classes>
 
