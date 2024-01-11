@@ -12,11 +12,21 @@ public class AccountPage extends BasePage{
         super(driver);
     }
     
+    
+    private By changeIcon = By.xpath("(//button[@type='button'])[1]");
+    private By accountLink = By.xpath("/html[1]/body[1]/div[2]/header[1]/div[1]/div[1]/ul[1]/li[2]/div[1]/ul[1]/li[1]/a[1]");
+    private By editLink = By.xpath("(//span[contains(text(),'Edit')])[1]");
+    private By firstName = By.xpath("//input[@id='firstname']");
+    private By lastName = By.xpath("//input[@id='lastname']");
+    private By saveBtn = By.xpath("//button[@type='submit']//span[contains(text(),'Save')]");
+    private By savedMessage = By.xpath("//div[contains(text(),'You saved the account information.')]");
+    private By newName = By.xpath("//p[contains(text(),'Yusuf Altay')]");
+    
     Faker faker = new Faker();
     //Page Locator For Sign Up
     private By createAnAccountButton = By.linkText("Create an Account");
    
-    //Verify Page is Correct
+    //Verify Page is Correct or Not
     private String pageInnerHeader = "Create New Customer Account";
     private By createAnAccountPageHeader = By.cssSelector(".base");
     private String urlOfSignUpPage = "https://kams.studio/customer/account/create/";
@@ -40,14 +50,7 @@ public class AccountPage extends BasePage{
     private String afterSignInPageTitle = "My Account";
     private String afterSignInPageUrl = "https://kams.studio/customer/account/";
     
-    private By changeIcon = By.xpath("(//button[@type='button'])[1]");
-    private By accountLink = By.xpath("/html[1]/body[1]/div[2]/header[1]/div[1]/div[1]/ul[1]/li[2]/div[1]/ul[1]/li[1]/a[1]");
-    private By editLink = By.xpath("(//span[contains(text(),'Edit')])[1]");
-    private By firstName = By.xpath("//input[@id='firstname']");
-    private By lastName = By.xpath("//input[@id='lastname']");
-    private By saveBtn = By.xpath("//button[@type='submit']//span[contains(text(),'Save')]");
-    private By savedMessage = By.xpath("//div[contains(text(),'You saved the account information.')]");
-    private By newName = By.xpath("//p[contains(text(),'Yusuf Altay')]");
+    
     
     // methods
     public WebElement getChangeIconElement(){
@@ -113,6 +116,9 @@ public class AccountPage extends BasePage{
     public String getNewName(){
         return getNewNameElement().getText();
     }
+    
+    
+    
     public WebElement getCreateAnAccountButton(){return getElement(createAnAccountButton);}
     public WebElement getFirstNameField(){return getElement(firstNameField);}
     public WebElement getLastNameField(){return getElement(lastNameField);}
@@ -130,6 +136,8 @@ public class AccountPage extends BasePage{
         wait.until(ExpectedConditions.presenceOfElementLocated(signOutButton));
         getSignOutElement().click();
     }
+    
+    //Verify Before Start input Data
     public boolean verifyUrl(String Url){
         return Url.equals(urlOfSignUpPage);
     }
@@ -139,11 +147,15 @@ public class AccountPage extends BasePage{
     }
     public boolean verifyPageTitle(String PageTitle){return PageTitle.equals(pageTitle);}
     
+    
+    
     //After Sign In Verify
     public boolean verifyAfterUrl(){return driver.getCurrentUrl().equals(afterSignInPageUrl);}
     public boolean verifyAfterPageTitle(){return driver.getTitle().equals(afterSignInPageTitle);}
     public boolean verifySuccessMessageDisplayed(){return getSuccessfulMessage().isDisplayed();}
     
+    
+    //Actual Action Method
     public void InputAccountInfo(){
         try {
             Thread.sleep(5000);
