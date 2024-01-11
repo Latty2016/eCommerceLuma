@@ -13,6 +13,8 @@ public class BaseTest {
     WebDriver driver;
    public Page page;
     String URL= ConfigFileManager.readValue("config.properties","url");
+    String FrontEnd_UserName= ConfigFileManager.readValue("config.properties","FrontEndUserName");
+    String FrontEnd_Password= ConfigFileManager.readValue("config.properties","FrontEndUserPassWord");
     @BeforeMethod
     public void setUp()
     {
@@ -22,6 +24,7 @@ public class BaseTest {
         // we cannot create constructor of Page class as it is abstract class, so we can get the constructor of BasePage class
         // by creating instance of BasePage class as it extends Page class and includes the constructor of Page class as super
         page = new BasePage(driver);
+        page.getInstance(LoginPage.class).doLogin(FrontEnd_UserName,FrontEnd_Password);
     }
     @AfterMethod
     public void tearDown()

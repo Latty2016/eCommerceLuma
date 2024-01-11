@@ -12,5 +12,5 @@ public class Enum extends BasePage {
     * while explicit wait, waits for a specific condition, such as the presence of an element or the element to be clickable.
     * Scope: Implicit wait applies globally, while explicit wait applies locally to a specific element.
     * */
-  public static long IMPLICIT_WAIT = 25;
+  public static long IMPLICIT_WAIT = 10;
 }

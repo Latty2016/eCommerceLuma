@@ -4,6 +4,8 @@ import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class AccountPage extends BasePage{
     public AccountPage(WebDriver driver) {
@@ -28,6 +30,7 @@ public class AccountPage extends BasePage{
     private By password = By.cssSelector("input#password");
     private By passwordConfirm = By.id("password-confirmation");
     private By createAnAccountSubmitButton = By.cssSelector(".action.submit.primary");
+    private By signOutButton = By.linkText("Sign Out");
     
     //After Sign up
     //"Thank you for registering with Main Website Store."
@@ -37,6 +40,79 @@ public class AccountPage extends BasePage{
     private String afterSignInPageTitle = "My Account";
     private String afterSignInPageUrl = "https://kams.studio/customer/account/";
     
+    private By changeIcon = By.xpath("(//button[@type='button'])[1]");
+    private By accountLink = By.xpath("/html[1]/body[1]/div[2]/header[1]/div[1]/div[1]/ul[1]/li[2]/div[1]/ul[1]/li[1]/a[1]");
+    private By editLink = By.xpath("(//span[contains(text(),'Edit')])[1]");
+    private By firstName = By.xpath("//input[@id='firstname']");
+    private By lastName = By.xpath("//input[@id='lastname']");
+    private By saveBtn = By.xpath("//button[@type='submit']//span[contains(text(),'Save')]");
+    private By savedMessage = By.xpath("//div[contains(text(),'You saved the account information.')]");
+    private By newName = By.xpath("//p[contains(text(),'Yusuf Altay')]");
+    
+    // methods
+    public WebElement getChangeIconElement(){
+        return getElement(changeIcon);
+    }
+    public void clickChangeIconButton(){
+        waitForElementPresent(accountLink);
+        getChangeIconElement().click();
+    }
+    public WebElement getAccountLinkElement(){
+        return getElement(accountLink);
+    }
+    public void clickAccountLink(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(accountLink));
+        Actions action = new Actions(driver);
+        action.moveToElement(getAccountLinkElement()).build().perform();
+       /* JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click();", accountLink);*/
+        getAccountLinkElement().click();
+    }
+    public WebElement getEditLinkElement(){
+        waitForElementPresent(editLink);
+        return getElement(editLink);
+    }
+    public void clickEditLink(){
+        getEditLinkElement().click();
+    }
+    public WebElement getFirstNameTextFieldElement(){
+        return getElement(firstName);
+    }
+    public void inputFirstName(){
+        getFirstNameTextFieldElement().clear();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        getFirstNameTextFieldElement().sendKeys("Yusuf");
+    }
+    public WebElement getLastNameTextFieldElement(){
+        return getElement(lastName);
+    }
+    public void inputLastName(){
+        getLastNameTextFieldElement().clear();
+        getLastNameTextFieldElement().sendKeys("Altay");
+    }
+    public WebElement getSaveBtnElement(){
+        return getElement(saveBtn);
+    }
+    public void clickSaveBtn(){
+        getSaveBtnElement().click();
+    }
+    public WebElement getSavedMessageElement(){
+        return getElement(savedMessage);
+    }
+    public String getSavedMessage(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(savedMessage));
+        return getSavedMessageElement().getText();
+    }
+    public WebElement getNewNameElement(){
+        return getElement(newName);
+    }
+    public String getNewName(){
+        return getNewNameElement().getText();
+    }
     public WebElement getCreateAnAccountButton(){return getElement(createAnAccountButton);}
     public WebElement getFirstNameField(){return getElement(firstNameField);}
     public WebElement getLastNameField(){return getElement(lastNameField);}
@@ -48,6 +124,12 @@ public class AccountPage extends BasePage{
     public WebElement getCreateAnAccountSubmitButton(){return getElement(createAnAccountSubmitButton);}
     public WebElement getCreateAnAccountPageHeader(){return getElement(createAnAccountPageHeader);}
     public WebElement getSuccessfulMessage(){return getElement(successfulMessage);}
+    public WebElement getSignOutElement(){return getElement(signOutButton);}
+    
+    public void clickSignOutButton(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(signOutButton));
+        getSignOutElement().click();
+    }
     public boolean verifyUrl(String Url){
         return Url.equals(urlOfSignUpPage);
     }
@@ -63,6 +145,13 @@ public class AccountPage extends BasePage{
     public boolean verifySuccessMessageDisplayed(){return getSuccessfulMessage().isDisplayed();}
     
     public void InputAccountInfo(){
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        clickChangeIconButton();
+        clickSignOutButton();
         getCreateAnAccountButton().click(); //Click Button
         //Verify the Page
         verifyPageHeader();
@@ -83,5 +172,7 @@ public class AccountPage extends BasePage{
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-    }
+
+        
+}
 }
