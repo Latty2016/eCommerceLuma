@@ -1,6 +1,7 @@
 package com.qa.pages;
 
 import com.github.javafaker.Faker;
+import com.qa.testData.DataHolder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +20,7 @@ public class AccountPage extends BasePage{
     private By firstName = By.xpath("//input[@id='firstname']");
     private By lastName = By.xpath("//input[@id='lastname']");
     private By saveBtn = By.xpath("//button[@type='submit']//span[contains(text(),'Save')]");
-    private By savedMessage = By.xpath("//div[contains(text(),'You saved the account information.')]");
+    private By successMessage = By.xpath("//div[contains(text(),'You saved the account information.')]");
     private By newName = By.xpath("//p[contains(text(),'Yusuf Altay')]");
     
     Faker faker = new Faker();
@@ -88,14 +89,16 @@ public class AccountPage extends BasePage{
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        getFirstNameTextFieldElement().sendKeys("Yusuf");
+        DataHolder.setFirstName(faker.name().firstName());
+        getFirstNameTextFieldElement().sendKeys(DataHolder.getFirstName());
     }
     public WebElement getLastNameTextFieldElement(){
         return getElement(lastName);
     }
     public void inputLastName(){
         getLastNameTextFieldElement().clear();
-        getLastNameTextFieldElement().sendKeys("Altay");
+        DataHolder.setLastName(faker.name().lastName());
+        getLastNameTextFieldElement().sendKeys(DataHolder.getLastName());
     }
     public WebElement getSaveBtnElement(){
         return getElement(saveBtn);
@@ -103,22 +106,25 @@ public class AccountPage extends BasePage{
     public void clickSaveBtn(){
         getSaveBtnElement().click();
     }
-    public WebElement getSavedMessageElement(){
-        return getElement(savedMessage);
+    public WebElement getSuccessMessageElement(){
+        return getElement(successMessage);
     }
-    public String getSavedMessage(){
-        wait.until(ExpectedConditions.presenceOfElementLocated(savedMessage));
+    public boolean verifySuccessMessage(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(successMessage));
+        return getSuccessMessageElement().isDisplayed();
+    }
+   /* public String getSuccessMessage(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(successMessage));
         return getSavedMessageElement().getText();
-    }
+    }*/
     public WebElement getNewNameElement(){
         return getElement(newName);
     }
     public String getNewName(){
-        return getNewNameElement().getText();
+
+        return DataHolder.getFirstName() + " " +  DataHolder.getLastName();
     }
-    
-    
-    
+
     public WebElement getCreateAnAccountButton(){return getElement(createAnAccountButton);}
     public WebElement getFirstNameField(){return getElement(firstNameField);}
     public WebElement getLastNameField(){return getElement(lastNameField);}
