@@ -1,6 +1,7 @@
 package com.qa.testcases;
 
 import com.qa.pages.AccountPage;
+import com.qa.testData.DataHolder;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -13,7 +14,7 @@ public class AccountPageTest extends BaseTest{
         Assert.assertTrue(page.getInstance(AccountPage.class).verifyAfterPageTitle());
         Assert.assertTrue(page.getInstance(AccountPage.class).verifySuccessMessageDisplayed());
     }
-    @Test
+    @Test(description = "Latif --->A user should be able to edit account information ")
     public void editAccountInformationTest(){
         page.getInstance(AccountPage.class).clickChangeIconButton();
         page.getInstance(AccountPage.class).clickAccountLink();
@@ -21,10 +22,9 @@ public class AccountPageTest extends BaseTest{
         page.getInstance(AccountPage.class).inputFirstName();
         page.getInstance(AccountPage.class).inputLastName();
         page.getInstance(AccountPage.class).clickSaveBtn();
-        
-        String successMessage = page.getInstance(AccountPage.class).getSavedMessage();
-        System.out.println(successMessage);
+        Assert.assertTrue(page.getInstance(AccountPage.class).verifySuccessMessage());
         String new_name = page.getInstance(AccountPage.class).getNewName();
         System.out.println(new_name);
+        Assert.assertEquals(new_name, DataHolder.getFirstName()+" "+DataHolder.getLastName());
     }
 }
