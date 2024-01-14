@@ -22,6 +22,7 @@ public class AccountPage extends BasePage{
     private By saveBtn = By.xpath("//button[@type='submit']//span[contains(text(),'Save')]");
     private By successMessage = By.xpath("//div[contains(text(),'You saved the account information.')]");
     private By newName = By.xpath("//p[contains(text(),'Yusuf Altay')]");
+    private By accountInfo = By.xpath("//div[@class='block-title']//Strong[text()='Account Information']");
     
     Faker faker = new Faker();
     //Page Locator For Sign Up
@@ -123,6 +124,12 @@ public class AccountPage extends BasePage{
     public String getNewName(){
 
         return DataHolder.getFirstName() + " " +  DataHolder.getLastName();
+    }
+    public WebElement getAccountInfoElement(){
+        return getElement(accountInfo);
+    }
+    public boolean verifyAccountInfo(){
+        return getAccountInfoElement().isDisplayed();
     }
 
     public WebElement getCreateAnAccountButton(){return getElement(createAnAccountButton);}

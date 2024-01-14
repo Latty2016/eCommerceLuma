@@ -27,4 +27,10 @@ public class AccountPageTest extends BaseTest{
         System.out.println(new_name);
         Assert.assertEquals(new_name, DataHolder.getFirstName()+" "+DataHolder.getLastName());
     }
+    @Test(description = "Latif --->A user should be able to view Account Information ")
+    public void verifyAccountInfo(){
+        page.getInstance(AccountPage.class).clickChangeIconButton();
+        page.getInstance(AccountPage.class).clickAccountLink();
+        Assert.assertTrue(page.getInstance(AccountPage.class).verifyAccountInfo());
+    }
 }
