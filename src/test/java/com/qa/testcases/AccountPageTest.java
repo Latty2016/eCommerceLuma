@@ -33,4 +33,14 @@ public class AccountPageTest extends BaseTest{
         page.getInstance(AccountPage.class).clickAccountLink();
         Assert.assertTrue(page.getInstance(AccountPage.class).verifyAccountInfo());
     }
+    @Test(description = "Latif --->A user should be able to see My product Reviews ")
+    public void verifyMyProductReviews(){
+        page.getInstance(AccountPage.class).clickChangeIconButton();
+        page.getInstance(AccountPage.class).clickAccountLink();
+        String title = page.getInstance(AccountPage.class).getProductReviewsPageTitle();
+        System.out.println("The page title is " + title);
+        Assert.assertEquals(title,"My Product Reviews");
+        page.getInstance(AccountPage.class).clickMyProductReviewsLink();
+        Assert.assertTrue(page.getInstance(AccountPage.class).verifyMyProductReviews());
+    }
 }

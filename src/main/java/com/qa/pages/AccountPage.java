@@ -15,7 +15,7 @@ public class AccountPage extends BasePage{
     
     
     private By changeIcon = By.xpath("(//button[@type='button'])[1]");
-    private By accountLink = By.xpath("/html[1]/body[1]/div[2]/header[1]/div[1]/div[1]/ul[1]/li[2]/div[1]/ul[1]/li[1]/a[1]");
+    private By accountLink = By.linkText("My Account");
     private By editLink = By.xpath("(//span[contains(text(),'Edit')])[1]");
     private By firstName = By.xpath("//input[@id='firstname']");
     private By lastName = By.xpath("//input[@id='lastname']");
@@ -23,6 +23,9 @@ public class AccountPage extends BasePage{
     private By successMessage = By.xpath("//div[contains(text(),'You saved the account information.')]");
     private By newName = By.xpath("//p[contains(text(),'Yusuf Altay')]");
     private By accountInfo = By.xpath("//div[@class='block-title']//Strong[text()='Account Information']");
+    private By myProductReviewsLink = By.xpath("//li/a[text()='My Product Reviews']");
+    private By myProductReviewsHeader = By.xpath("//span[@class='base']");
+
     
     Faker faker = new Faker();
     //Page Locator For Sign Up
@@ -130,6 +133,26 @@ public class AccountPage extends BasePage{
     }
     public boolean verifyAccountInfo(){
         return getAccountInfoElement().isDisplayed();
+    }
+
+    public String getProductReviewsPageTitle(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(myProductReviewsHeader));
+        return getTitle();
+    }
+    public WebElement getMyProductReviewsLinkElement(){
+        return getElement(myProductReviewsLink);
+    }
+    public void clickMyProductReviewsLink(){
+        Actions actions = new Actions(driver);
+        actions.moveToElement(getMyProductReviewsLinkElement()).build().perform();
+        getMyProductReviewsLinkElement().click();
+    }
+
+    public WebElement myProductReviewsHeaderElement(){
+        return getElement(myProductReviewsHeader);
+    }
+    public boolean verifyMyProductReviews(){
+      return myProductReviewsHeaderElement().isDisplayed();
     }
 
     public WebElement getCreateAnAccountButton(){return getElement(createAnAccountButton);}
