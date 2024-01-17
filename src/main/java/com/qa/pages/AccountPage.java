@@ -25,6 +25,7 @@ public class AccountPage extends BasePage{
     private By accountInfo = By.xpath("//div[@class='block-title']//Strong[text()='Account Information']");
     private By myProductReviewsLink = By.xpath("//li/a[text()='My Product Reviews']");
     private By myProductReviewsHeader = By.xpath("//span[@class='base']");
+    private By newsLetterSubsLink = By.xpath("//li/a[text()='Newsletter Subscriptions']");
 
     
     Faker faker = new Faker();
@@ -54,20 +55,44 @@ public class AccountPage extends BasePage{
     private By successfulMessage = By.cssSelector(".message-success.success.message>div");
     private String afterSignInPageTitle = "My Account";
     private String afterSignInPageUrl = "https://kams.studio/customer/account/";
-    
-    
-    
-    // methods
+
+    // methods for getting elements
     public WebElement getChangeIconElement(){
         return getElement(changeIcon);
-    }
-    public void clickChangeIconButton(){
-        waitForElementPresent(accountLink);
-        getChangeIconElement().click();
     }
     public WebElement getAccountLinkElement(){
         return getElement(accountLink);
     }
+    public WebElement getSaveBtnElement(){
+        return getElement(saveBtn);
+    }
+    public WebElement getNewNameElement(){
+        return getElement(newName);
+    }
+    public WebElement myProductReviewsHeaderElement(){
+        return getElement(myProductReviewsHeader);
+    }
+    public WebElement getEditLinkElement(){ waitForElementPresent(editLink); return getElement(editLink);}
+    public WebElement getLastNameTextFieldElement(){
+        return getElement(lastName);
+    }
+    public WebElement getMyProductReviewsLinkElement(){
+        return getElement(myProductReviewsLink);
+    }
+    public WebElement getSuccessMessageElement(){
+        return getElement(successMessage);
+    }
+    public WebElement getAccountInfoElement(){
+        return getElement(accountInfo);
+    }
+    public WebElement getNewsLetterSubsLinkElement(){return getElement(newsLetterSubsLink);}
+
+    // click the changeInconButton
+    public void clickChangeIconButton(){
+        waitForElementPresent(accountLink);
+        getChangeIconElement().click();
+    }
+    //click the account link
     public void clickAccountLink(){
         wait.until(ExpectedConditions.presenceOfElementLocated(accountLink));
         Actions action = new Actions(driver);
@@ -76,16 +101,14 @@ public class AccountPage extends BasePage{
         js.executeScript("arguments[0].click();", accountLink);*/
         getAccountLinkElement().click();
     }
-    public WebElement getEditLinkElement(){
-        waitForElementPresent(editLink);
-        return getElement(editLink);
-    }
+    // click the editLink
     public void clickEditLink(){
         getEditLinkElement().click();
     }
     public WebElement getFirstNameTextFieldElement(){
         return getElement(firstName);
     }
+    //input firstName textField
     public void inputFirstName(){
         getFirstNameTextFieldElement().clear();
         try {
@@ -96,63 +119,42 @@ public class AccountPage extends BasePage{
         DataHolder.setFirstName(faker.name().firstName());
         getFirstNameTextFieldElement().sendKeys(DataHolder.getFirstName());
     }
-    public WebElement getLastNameTextFieldElement(){
-        return getElement(lastName);
-    }
+    //input lastName textField
     public void inputLastName(){
         getLastNameTextFieldElement().clear();
         DataHolder.setLastName(faker.name().lastName());
         getLastNameTextFieldElement().sendKeys(DataHolder.getLastName());
     }
-    public WebElement getSaveBtnElement(){
-        return getElement(saveBtn);
-    }
+    //click the SaveButton
     public void clickSaveBtn(){
         getSaveBtnElement().click();
     }
-    public WebElement getSuccessMessageElement(){
-        return getElement(successMessage);
-    }
+  // verify successMessage after firstName and lastName input
     public boolean verifySuccessMessage(){
         wait.until(ExpectedConditions.presenceOfElementLocated(successMessage));
         return getSuccessMessageElement().isDisplayed();
     }
-   /* public String getSuccessMessage(){
-        wait.until(ExpectedConditions.presenceOfElementLocated(successMessage));
-        return getSavedMessageElement().getText();
-    }*/
-    public WebElement getNewNameElement(){
-        return getElement(newName);
-    }
+    //getting the firstName and lastName to verify them
     public String getNewName(){
-
         return DataHolder.getFirstName() + " " +  DataHolder.getLastName();
-    }
-    public WebElement getAccountInfoElement(){
-        return getElement(accountInfo);
     }
     public boolean verifyAccountInfo(){
         return getAccountInfoElement().isDisplayed();
     }
-
     public String getProductReviewsPageTitle(){
         wait.until(ExpectedConditions.presenceOfElementLocated(myProductReviewsHeader));
         return getTitle();
-    }
-    public WebElement getMyProductReviewsLinkElement(){
-        return getElement(myProductReviewsLink);
     }
     public void clickMyProductReviewsLink(){
         Actions actions = new Actions(driver);
         actions.moveToElement(getMyProductReviewsLinkElement()).build().perform();
         getMyProductReviewsLinkElement().click();
     }
-
-    public WebElement myProductReviewsHeaderElement(){
-        return getElement(myProductReviewsHeader);
-    }
     public boolean verifyMyProductReviews(){
       return myProductReviewsHeaderElement().isDisplayed();
+    }
+    public boolean verifyNewsLetterSubsLink(){
+        return getNewsLetterSubsLinkElement().isDisplayed();
     }
 
     public WebElement getCreateAnAccountButton(){return getElement(createAnAccountButton);}
@@ -182,9 +184,7 @@ public class AccountPage extends BasePage{
         return pageInnerHeader.equals(getCreateAnAccountPageHeader());
     }
     public boolean verifyPageTitle(String PageTitle){return PageTitle.equals(pageTitle);}
-    
-    
-    
+
     //After Sign In Verify
     public boolean verifyAfterUrl(){return driver.getCurrentUrl().equals(afterSignInPageUrl);}
     public boolean verifyAfterPageTitle(){return driver.getTitle().equals(afterSignInPageTitle);}
