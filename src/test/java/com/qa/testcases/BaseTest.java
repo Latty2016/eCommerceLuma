@@ -29,6 +29,7 @@ public class BaseTest {
     @AfterMethod
     public void tearDown()
     {
+        System.out.println("1");
         driver.quit();
     }
 
