@@ -174,8 +174,8 @@ public class AccountPage extends BasePage{
         wait.until(ExpectedConditions.presenceOfElementLocated(signOutButton));
         getSignOutElement().click();
     }
-    
-    //Verify Before Start input Data
+
+    //Verify Before Start input Data//
     public boolean verifyUrl(String Url){
         return Url.equals(urlOfSignUpPage);
     }
