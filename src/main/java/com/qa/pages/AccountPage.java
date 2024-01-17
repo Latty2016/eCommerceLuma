@@ -183,8 +183,6 @@ public class AccountPage extends BasePage{
     }
     public boolean verifyPageTitle(String PageTitle){return PageTitle.equals(pageTitle);}
     
-    
-    
     //After Sign In Verify
     public boolean verifyAfterUrl(){return driver.getCurrentUrl().equals(afterSignInPageUrl);}
     public boolean verifyAfterPageTitle(){return driver.getTitle().equals(afterSignInPageTitle);}
