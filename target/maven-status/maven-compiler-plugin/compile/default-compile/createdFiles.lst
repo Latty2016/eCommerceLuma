@@ -1,7 +1,0 @@
-com\qa\pages\LoginPage.class
-com\qa\utils\Enum.class
-com\qa\pages\BasePage.class
-com\qa\pages\HomePage.class
-com\qa\configFileManager\ConfigFileManager.class
-com\qa\extentReportListener\ExtentReporterNG.class
-com\qa\pages\Page.class
