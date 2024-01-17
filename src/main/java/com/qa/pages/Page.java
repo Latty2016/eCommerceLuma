@@ -24,6 +24,8 @@ public abstract class Page {
     public abstract WebElement getElement(By locator);
 
     public abstract void waitForElementPresent(By locator);
+    public abstract void waitTilPresent(WebElement webElement);
+    public abstract void sleep(int seconds);
 
     // Java Generic class to return page class instance
     public <Tpage extends BasePage> Tpage getInstance(Class<Tpage> tpageClass) {

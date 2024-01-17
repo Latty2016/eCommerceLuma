@@ -35,7 +35,27 @@ public class BasePage extends Page {
             e.printStackTrace();
             System.out.println("Some error occurred while trying to find element " + locator.toString());
         }
-
-
+        
     }
+    
+    @Override
+    public void waitTilPresent(WebElement webElement) {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(webElement));
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Some error occurred while trying to find element " + webElement.toString());
+        }
+    }
+    @Override
+    public void sleep(int seconds){     //Sometimes in debugging stage, u should wait for some reason, so just make a sleep method, just call this method when u want to use the Thread.sleep function
+        try {
+            Thread.sleep(1000*seconds);             //Because Thread.sleep() 's param is calculated by milliSeconds, and we want to just give second by default param to this method, so, u have to convert the millisecond to second in here
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);              //try-catch
+        }
+    }
+    
+    
+    
 }
