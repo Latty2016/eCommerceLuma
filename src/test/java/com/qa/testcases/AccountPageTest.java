@@ -42,6 +42,5 @@ public class AccountPageTest extends BaseTest{
         Assert.assertEquals(title,"My Product Reviews");
         page.getInstance(AccountPage.class).clickMyProductReviewsLink();
         Assert.assertTrue(page.getInstance(AccountPage.class).verifyMyProductReviews());
-
     }
 }
