@@ -218,5 +218,6 @@ public class AccountPage extends BasePage{
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
 }
 }

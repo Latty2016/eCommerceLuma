@@ -49,5 +49,6 @@ public class AccountPageTest extends BaseTest{
         page.getInstance(AccountPage.class).clickChangeIconButton();
         page.getInstance(AccountPage.class).clickAccountLink();
         Assert.assertTrue(page.getInstance(AccountPage.class).verifyNewsLetterSubsLink());
+
     }
 }
