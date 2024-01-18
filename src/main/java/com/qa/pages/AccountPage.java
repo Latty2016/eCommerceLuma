@@ -189,8 +189,6 @@ public class AccountPage extends BasePage{
     public boolean verifyAfterUrl(){return driver.getCurrentUrl().equals(afterSignInPageUrl);}
     public boolean verifyAfterPageTitle(){return driver.getTitle().equals(afterSignInPageTitle);}
     public boolean verifySuccessMessageDisplayed(){return getSuccessfulMessage().isDisplayed();}
-    
-    
     //Actual Action Method
     public void InputAccountInfo(){
         try {
@@ -221,6 +219,5 @@ public class AccountPage extends BasePage{
             throw new RuntimeException(e);
         }
 
-        
 }
 }
