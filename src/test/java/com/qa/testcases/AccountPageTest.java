@@ -42,6 +42,7 @@ public class AccountPageTest extends BaseTest{
         Assert.assertEquals(title,"My Product Reviews");
         page.getInstance(AccountPage.class).clickMyProductReviewsLink();
         Assert.assertTrue(page.getInstance(AccountPage.class).verifyMyProductReviews());
+        //
     }
     @Test(description = "Latif --->A user should be able to see news letter subscription link")
     public void verifyNewsLetterSubsLink(){
