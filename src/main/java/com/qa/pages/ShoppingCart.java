@@ -1,5 +1,6 @@
 package com.qa.pages;
 
+import com.qa.testData.DataHolder;
 import org.bouncycastle.tsp.TSPIOException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +23,7 @@ public class ShoppingCart extends BasePage{
     }
     String qtyInInfoPage;
     String qtyInShoppingCartIcon;
+    
     
     @FindBy(id = "ui-id-21")
     WebElement gearTopMenu;
@@ -54,6 +56,10 @@ public class ShoppingCart extends BasePage{
     List<WebElement> ProductListInShoppingCart;
     @FindBy(css = ".message-success.success.message")
     WebElement successfullyAddedToShoppingCart;
+    @FindBy(css = ".input-text.qty")
+    WebElement qtyInShoppingCartPage;
+    @FindBy(css = ".action.update")
+    WebElement updateShoppingCartButton;
     
     //By Locators
     private By gearTopMenuBy = By.id("ui-id-21");
@@ -68,6 +74,8 @@ public class ShoppingCart extends BasePage{
     private By quantityInShoppingCartIconBy = By.id("cart-item-4-qty");
     private By arrowDropNextGearMenuBy = By.cssSelector("#ui-id-21 > .ui-menu-icon.ui-icon.ui-icon-caret-1-e");
     private By viewAndEditCartLinkBy = By.cssSelector("a.action.viewcart");
+    private By qtyInShoppingCartPageBy = By.cssSelector(".input-text.qty");
+    private By updateShoppingCartButtonBy = By.cssSelector(".action.update");
     
     public void clickGearMenu(){
         waitForElementPresent(gearTopMenuBy);
@@ -115,6 +123,24 @@ public class ShoppingCart extends BasePage{
         waitForElementPresent(quantityInShoppingCartIconBy);
         return qtyInShoppingCartIcon = quantityInShoppingCartIcon.getText();
     }
+    public String getQtyFromShoppingCartPage(){
+        waitForElementPresent(qtyInShoppingCartPageBy);
+        return qtyInShoppingCartPage.getAttribute("data-item-qty");
+    }
+    public void clickViewAndEditCartLink(){
+        waitForElementPresent(viewAndEditCartLinkBy);
+        viewAndEditCartLink.click();
+    }
+    public void sendNewQtyToField(){
+        waitForElementPresent(qtyInShoppingCartPageBy);
+        Random random = new Random();
+        qtyInShoppingCartPage.clear();
+        qtyInShoppingCartPage.sendKeys(String.valueOf(random.nextInt(20)));
+    }
+    public void clickUpdateShoppingCartButton(){
+        waitForElementPresent(updateShoppingCartButtonBy);
+        updateShoppingCartButton.click();
+    }
     public boolean verifyProductName(){
         System.out.println("getProductNameInInfoPage() : " + getProductNameInInfoPage());
         System.out.println("getProductNameInShoppingCartIcon() : " + getProductNameInShoppingCartIcon());
@@ -127,6 +153,10 @@ public class ShoppingCart extends BasePage{
         System.out.println("getQtyValueFromInfoPage() : " + getQtyValueFromInfoPage());
         System.out.println("getQtyValueFromShoppingCartIcon() : " + getQtyValueFromShoppingCartIcon());
         return getQtyValueFromInfoPage().equals(getQtyValueFromShoppingCartIcon());
+    }
+    public boolean verifyShoppingCartUpdated(){
+        waitForElementPresent(qtyInShoppingCartPageBy);
+        return !(DataHolder.getBeforeQtyUpdate().equals(getQtyFromShoppingCartPage()));
     }
     public void addProductToShoppingCartMainMethod(){
         clickGearMenu();

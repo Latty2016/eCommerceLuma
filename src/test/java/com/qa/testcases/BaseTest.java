@@ -27,9 +27,7 @@ public class BaseTest {
         page.getInstance(LoginPage.class).doLogin(FrontEnd_UserName,FrontEnd_Password);
     }
     @AfterMethod
-    public void tearDown()
-    {
-        System.out.println("1");
+    public void tearDown() {
         driver.quit();
     }
 
