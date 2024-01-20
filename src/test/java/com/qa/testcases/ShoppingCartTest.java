@@ -19,11 +19,8 @@ public class ShoppingCartTest extends BaseTest {
         Thread.sleep(3000);
         driver.get("https://kams.studio/checkout/cart/");
         Thread.sleep(3000);
-//        page.getInstance(ShoppingCart.class).clickViewAndEditCartLink();
-        
         DataHolder.setBeforeQtyUpdate(page.getInstance(ShoppingCart.class).getQtyFromShoppingCartPage());
         System.out.println(DataHolder.getBeforeQtyUpdate());
-        
         Thread.sleep(3000);
         page.getInstance(ShoppingCart.class).sendNewQtyToField();
         page.getInstance(ShoppingCart.class).clickUpdateShoppingCartButton();
