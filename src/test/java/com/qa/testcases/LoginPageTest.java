@@ -3,7 +3,7 @@ package com.qa.testcases;
 import com.qa.configFileManager.ConfigFileManager;
 import com.qa.pages.HomePage;
 import com.qa.pages.LoginPage;
-import com.qa.testcases.BaseTest;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
