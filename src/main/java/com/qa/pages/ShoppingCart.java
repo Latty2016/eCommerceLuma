@@ -23,8 +23,7 @@ public class ShoppingCart extends BasePage{
     }
     String qtyInInfoPage;
     String qtyInShoppingCartIcon;
-    
-    
+
     @FindBy(id = "ui-id-21")
     WebElement gearTopMenu;
     @FindBy(id = "ui-id-22")
