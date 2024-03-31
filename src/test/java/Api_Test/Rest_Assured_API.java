@@ -31,7 +31,6 @@ public class Rest_Assured_API {
         System.out.println(response.getBody().prettyPrint());
         int statusCode = response.getStatusCode();
         Assert.assertEquals(statusCode,200);
-        //tets
     }
 
     }
