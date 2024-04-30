@@ -31,8 +31,14 @@ public class Rest_Assured_API {
         System.out.println(response.getBody().prettyPrint());
         int statusCode = response.getStatusCode();
         Assert.assertEquals(statusCode,200);
-        // test  // test
-    }
-
+      }
+      @Test(description = "Authorized user should be able to get currency")
+    public void getCurrencyTest(){
+        Response response = (Response) RestAssured.given().header("Authorization","Bearer" + apiToken)
+                .when().get(baseUrl + "V1/directory/currency");
+          System.out.println(response.getBody().prettyPrint());
+          int statusCode = response.getStatusCode();
+          Assert.assertEquals(statusCode,200);
+      }
     }
 
