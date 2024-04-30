@@ -40,5 +40,14 @@ public class Rest_Assured_API {
           int statusCode = response.getStatusCode();
           Assert.assertEquals(statusCode,200);
       }
+      @Test(description = "Authorized user should be able to get specific country by using country id")
+    public void getCountryTest(){
+        Response response = (Response)RestAssured.given().header("Authorization","Bearer" + apiToken)
+                .when().get(baseUrl + "V1/directory/countries/TR");
+          System.out.println(response.getBody().prettyPrint());
+          int statusCode = response.getStatusCode();
+          Assert.assertEquals(statusCode,200);
+
+      }
     }
 
